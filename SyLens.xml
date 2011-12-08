@@ -2,7 +2,7 @@
    <Shader Index="1" OutputBitDepth="Output">
       <Uniform Name="kCoeff" Type="float" DisplayName="Kappa" Page="0" Col="0" Row="0" Tooltip="" Inc="0.0001" Default="0.001" Min="-1000000.0" Max="1000000.0" ResDependent="None">
       </Uniform>
-      <Uniform Name="kCube" Type="float" DisplayName="Cubic Kappa" Page="0" Col="0" Row="0" Tooltip="" Inc="0.0001" Default="0.0000" Min="-10.0" Max="1000000.0" ResDependent="None">
+      <Uniform Name="kCube" Type="float" DisplayName="CubicKappa" Page="0" Col="0" Row="0" Tooltip="" Inc="0.0001" Default="0.0000" Min="-10.0" Max="1000000.0" ResDependent="None">
       </Uniform>
       <Uniform Name="doRedisto" Type="bool" DisplayName="Redistort" Tooltip="Applies distortion instead of removing it" Default="False" Page="0" Col="0" Row="1">
       </Uniform>
