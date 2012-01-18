@@ -64,19 +64,16 @@ vec2 undisto(vec2 pt, float r2) {
 void main(void)
 {
    vec2 uv;
-   // This is a coordinate in the OUTPUT, we however need a coord in the input. Hmm.
-   uv = gl_FragCoord.xy / adsk_result_w;
-   float _aspect = adsk_input1_w / adsk_input1_h;
    
-   uv = uv - 0.5;
-   float r2 = _aspect * _aspect * uv.x * uv.x + uv.y * uv.y;
-   if(doRedisto) {
-     uv = undisto(uv, r2);
-   } else {
-     uv = redisto(uv, r2);
-   }
-   // Back to off-corner
-   uv = uv + 0.5;
+   // This is a coordinate in the OUTPUT, we however need a coord in the input. Hmm.
+   uv = gl_FragCoord.xy / vec2(adsk_input1_w, adsk_input1_h);
+   
+   uv -= 0.5;
+   float r2 = adsk_input1_aspect * adsk_input1_aspect * uv.x * uv.x + uv.y * uv.y;
+   uv = redisto(uv, r2);
+   uv += 0.5;
+   
+   uv -= 0.01;
    
    vec4 tex0 = texture2D(input1, uv);
    gl_FragColor.rgba = vec4(tex0.rgb, 1.0 );
