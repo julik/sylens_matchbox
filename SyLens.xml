@@ -1,11 +1,9 @@
 <ShaderNodePreset Name="SyLens" Description="Syntheyes Lens Disto" SupportsAdaptiveDegradation="False">
    <Shader Index="1" OutputBitDepth="Output">
-      <Uniform Name="kCoeff" Type="float" DisplayName="Kappa" Page="0" Col="0" Row="0" Tooltip="" Inc="0.0001" Default="0.001" Min="-1000000.0" Max="1000000.0" ResDependent="None">
-      </Uniform>
-      <Uniform Name="kCube" Type="float" DisplayName="CubicKappa" Page="0" Col="0" Row="0" Tooltip="" Inc="0.0001" Default="0.0000" Min="-10.0" Max="1000000.0" ResDependent="None">
-      </Uniform>
-      <Uniform Name="doRedisto" Type="bool" DisplayName="Redistort" Tooltip="Applies distortion instead of removing it" Default="False" Page="0" Col="0" Row="1">
-      </Uniform>
+      <Uniform Name="kCoeff" Type="float" DisplayName="Square" Page="0" Col="0" Row="0" Tooltip="Quartic distortion"  Inc="0.0001" Default="-0.0236" Min="-0.1" Max="0.1" ResDependent="None" />
+      <Uniform Name="kCube" Type="float" DisplayName="Cubic" Page="0" Col="0" Row="1" Tooltip="Cubic distortion" Inc="0.0001" Default="0.0078" Min="-0.1" Max="0.1" ResDependent="None" />
+      <Uniform Name="apply_disto" Type="bool" Row="1" Page="0" Col="0" Row="2" Default="False" Tooltip="Apply distortion instead of removing it" DisplayName="Apply Distortion" />
+      
       <Uniform Index="0" 
          Name="input1"
          DisplayName="Front" 
@@ -13,14 +11,14 @@
          Type="sampler2D" 
          NoInput="Error"
          Mipmaps="False" 
-         GL_TEXTURE_WRAP_T="GL_REPEAT" 
-         GL_TEXTURE_WRAP_S="GL_REPEAT" 
+         GL_TEXTURE_WRAP_T="GL_CLAMP" 
+         GL_TEXTURE_WRAP_S="GL_CLAMP" 
          GL_TEXTURE_MAG_FILTER="GL_LINEAR" 
          GL_TEXTURE_MIN_FILTER="GL_LINEAR">
       </Uniform>
    </Shader>
    <Page Page="0" Name="SyLens">
-      <Col Page="0" Col="0" Name="Distortion">
+      <Col Page="0" Col="1" Name="SyLens Distortion">
       </Col>
    </Page>
 </ShaderNodePreset>
