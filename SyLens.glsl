@@ -1,3 +1,5 @@
+#version 120
+
 /*
   Original Lens Distortion Algorithm from SSontech (Syntheyes)
   http://www.ssontech.com/content/lensalg.htm
@@ -13,67 +15,58 @@ uniform sampler2D input1;
 uniform float adsk_input1_w, adsk_input1_h, adsk_input1_aspect;
 uniform float kCoeff, kCube;
 uniform float adsk_result_w, adsk_result_h;
-uniform bool doRedisto;
 
-vec2 redisto(vec2 pt, float r2) {
-  float r, rp, f, rlim, rplim, raw, err, slope;
-  float _aspect = adsk_input1_w / adsk_input1_h;
-  vec2 res;
-  
-  rp = sqrt(_aspect * _aspect * pt.x * pt.x + pt.y * pt.y);
-  if (kCoeff < 0.0) {
-    rlim = sqrt((-1.0/3.0) / kCoeff);
-    rplim = rlim * (1 + kCoeff*rlim*rlim);
-    if (rp >= 0.99 * rplim) {
-      f = rlim / rp;
-      return pt * f;
-    }
-  }
-
-  r = rp;
-  for (int i = 0; i < 20; i++) {
-    raw = kCoeff * r * r;
-    slope = 1 + 3*raw;
-    err = rp - r * (1 + raw);
-    if (abs(err) < 0.00001) break;
-    r += (err / slope);
-  }
-  f = r / rp;
-  
-  // For the pixel in the middle of the image the F can
-  // be NaN, so check for that and leave it be.
-  // http://stackoverflow.com/questions/570669/checking-if-a-float-or-float-is-nan-in-c
-  // If a NaN F does crop up it creates a black pixel in the image - not something we love
-  if(f == f) {
-    res = pt * f;
-  }
-  return res;
-}
-
-vec2 undisto(vec2 pt, float r2) {
+float distoF(float r) {
   float f;
+  float r2 = r * r;
   // Skipping the square root speeds up things
-  if (abs(kCube) > 0.00001) {
-    f = 1 + r2*(kCoeff + kCube * sqrt(r2));
-  } else {
-    f = 1 + r2*(kCoeff);
-  }
-  return pt * f;
+  f = 1 + r2*(kCoeff + kCube * sqrt(r2));
+  return f;
 }
 
 void main(void)
 {
    vec2 uv;
+   float f, r;
    
-   // This is a coordinate in the OUTPUT, we however need a coord in the input. Hmm.
-   uv = gl_FragCoord.xy / vec2(adsk_input1_w, adsk_input1_h);
+   // Get the pixel coordiante in the input
+   uv.x = gl_FragCoord.xy.x / adsk_input1_w;
+   uv.y = gl_FragCoord.xy.y / adsk_input1_h;
    
    uv -= 0.5;
-   float r2 = adsk_input1_aspect * adsk_input1_aspect * uv.x * uv.x + uv.y * uv.y;
-   uv = redisto(uv, r2);
-   uv += 0.5;
+   r = sqrt((uv.x*uv.x) +  (uv.y * uv.y * adsk_input1_aspect * adsk_input1_aspect));
    
-   uv -= 0.01;
+   // Build a lookup table on the radius, as a fixed-size table.
+   // We will use a vec3 since we will store the multipled number in the Z coordinate.
+   // So to recap: x will be the radius, y will be the f(x) distortion, and Z will be x * y;
+   vec3[32] lut;
+   float lut_r = 0;
+   
+   // Flame has no overflow bbox so we can safely max out at the image edge, plus some cushion
+   float max_r = sqrt((adsk_input1_aspect * adsk_input1_aspect) + 1) + 0.1;
+   float incr = max_r / 32;
+   for(int i=0; i < 32; i++) {
+       f = distoF(lut_r);
+       lut[i] = vec3(lut_r, f, lut_r * f);
+       lut_r += incr;
+   }
+   
+   // Now find the nehgbouring elements
+   int left_i = 0;
+   int right_i = 0;
+   for(int i=0; i < 32; i++) {
+       if(lut[i].z > r && left_i == 0 && right_i == 0) {
+           left_i = i;
+           right_i = i +1;
+       }
+   }
+
+   // Interpolate for the right F between those found vectors
+   float t = (r - lut[left_i].z) / (lut[right_i].z - lut[left_i].z);
+   f = (lut[right_i].y - lut[left_i].y) * t;
+   uv = uv / f;
+   
+   uv += 0.5;
    
    vec4 tex0 = texture2D(input1, uv);
    gl_FragColor.rgba = vec4(tex0.rgb, 1.0 );
