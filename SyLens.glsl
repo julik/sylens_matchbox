@@ -95,7 +95,7 @@ void main(void)
    uv.x = uv.x * f;
    uv.y = uv.y * f;
    
-   // Back from aspect to [-aspect..aspect] to [-1..1]
+   // Back from [-aspect..aspect] to [-1..1]
    uv.x = uv.x / adsk_input1_frameratio;
    
    // Remove UV shifts
