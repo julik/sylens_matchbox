@@ -34,7 +34,7 @@ float inverse_f(float r)
     vec3[32] lut;
     
     // Flame has no overflow bbox so we can safely max out at the image edge, plus some cushion
-    float max_r = sqrt((adsk_input1_frameratio * adsk_input1_frameratio) + 1) + 0.1;
+    float max_r = sqrt((adsk_input1_frameratio * adsk_input1_frameratio) + 1) + 1;
     float incr = max_r / 32;
     float lut_r = 0;
     float f;
@@ -45,17 +45,17 @@ float inverse_f(float r)
     }
     
     float df;
-    float dz;
+    float dr;
     float t;
     
     // Now find the nehgbouring elements
     for(int i=0; i < 32; i++) {
-        if(lut[i].z < r) {
+        if(lut[i].z > r && lut[i-1].z < r) {
             // found!
             df = lut[i+1].y - lut[i].y;
-            dz = lut[i+1].z - lut[i].z;
-            t = (r - lut[i].z) / dz;
-            return df * t;
+            dr = lut[i+1].z - lut[i].z;
+            t = (r - lut[i].z) / dr;
+            return lut[i].y + (df * t);
         }
     }
 }
@@ -91,9 +91,15 @@ void main(void)
    r = sqrt(uv.x*uv.x + uv.y*uv.y);
    
    // Apply or remove disto
-   f = distortion_f(r);
-   uv.x = uv.x * f;
-   uv.y = uv.y * f;
+   if(apply_disto) {
+       f = inverse_f(r);
+       uv.x = uv.x / f;
+       uv.y = uv.y / f;
+   } else {
+       f = distortion_f(r);
+       uv.x = uv.x * f;
+       uv.y = uv.y * f;
+   }
    
    // Back from [-aspect..aspect] to [-1..1]
    uv.x = uv.x / adsk_input1_frameratio;
