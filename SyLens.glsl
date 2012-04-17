@@ -81,17 +81,27 @@ void main(void)
    uv.x = (uv.x *2 ) - 1;
    uv.y = (uv.y *2 ) - 1;
    
+   // Add UV shifts
+   uv.x += uShift;
+   uv.y += vShift;
+   
    // Make the X value the aspect value
    uv.x = uv.x * adsk_input1_frameratio;
    
    // Compute the disto
    r = sqrt(uv.x*uv.x + uv.y*uv.y);
+   
+   // Apply or remove disto
    f = distortion_f(r);
    uv.x = uv.x * f;
    uv.y = uv.y * f;
    
    // Back from aspect to [-aspect..aspect] to [-1..1]
    uv.x = uv.x / adsk_input1_frameratio;
+   
+   // Remove UV shifts
+   uv.x -= uShift;
+   uv.y -= vShift;
    
    // Back to OGL UV
    uv.x = (uv.x + 1) / 2;
