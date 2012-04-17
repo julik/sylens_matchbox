@@ -12,7 +12,8 @@
 */
 
 // Controls
-uniform float kCoeff, kCube, uShift, vShift;
+uniform float kCoeff, kCube, kOverflow, uShift, vShift;
+uniform float chroma_red, chroma_green, chroma_blue;
 uniform bool apply_disto;
 
 // Uniform inputs
@@ -76,6 +77,7 @@ void main(void)
    uv.x = px.x / adsk_input1_w;
    uv.y = px.y / adsk_input1_h;
    
+       
    // And to Syntheyes UV which are [-aspect..+aspect] on X and [1..-1] on Y
    uv.x = (uv.x *2 ) - 1;
    uv.y = (uv.y *2 ) - 1;
@@ -89,6 +91,11 @@ void main(void)
    
    // Compute the radius
    r = sqrt(uv.x*uv.x + uv.y*uv.y);
+   
+   // If we are redistorting, account for the plate oversize
+   if(apply_disto) {
+       r = r*kOverflow;
+   }
    
    // Apply or remove disto
    if(apply_disto) {
