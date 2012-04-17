@@ -20,7 +20,9 @@
       </Uniform>
    </Shader>
    <Page Page="0" Name="SyLens">
-      <Col Page="0" Col="1" Name="SyLens Distortion">
+      <Col Page="0" Col="0" Name="Distortion">
+      </Col>
+      <Col Page="0" Col="1" Name="Centerpoint shift">
       </Col>
    </Page>
 </ShaderNodePreset>
