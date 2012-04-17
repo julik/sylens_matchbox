@@ -1,7 +1,9 @@
 <ShaderNodePreset Name="SyLens" Description="Syntheyes Lens Disto" SupportsAdaptiveDegradation="False">
    <Shader Index="1" OutputBitDepth="Output">
-      <Uniform Name="kCoeff" Type="float" DisplayName="Square" Page="0" Col="0" Row="0" Tooltip="Quartic distortion"  Inc="0.0001" Default="-0.0236" Min="-0.1" Max="0.1" ResDependent="None" />
+      <Uniform Name="kCoeff" Type="float" DisplayName="Quartic" Page="0" Col="0" Row="0" Tooltip="Quartic distortion"  Inc="0.0001" Default="-0.0236" Min="-0.1" Max="0.1" ResDependent="None" />
       <Uniform Name="kCube" Type="float" DisplayName="Cubic" Page="0" Col="0" Row="1" Tooltip="Cubic distortion" Inc="0.0001" Default="0.0078" Min="-0.1" Max="0.1" ResDependent="None" />
+      <Uniform Name="uShift" Type="float" DisplayName="X Shift" Page="0" Col="1" Row="0" Tooltip="Horizontal centerpoint shift" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
+      <Uniform Name="vShift" Type="float" DisplayName="Y Shift" Page="0" Col="1" Row="1" Tooltip="Vertical centerpoint shift" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
       <Uniform Name="apply_disto" Type="bool" Row="1" Page="0" Col="0" Row="2" Default="False" Tooltip="Apply distortion instead of removing it" DisplayName="Apply Distortion" />
       
       <Uniform Index="0" 
