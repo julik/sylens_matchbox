@@ -21,8 +21,7 @@ uniform float adsk_input1_w, adsk_input1_h, adsk_input1_aspect, adsk_input1_fram
 uniform float adsk_result_w, adsk_result_h;
 
 float distortion_f(float r) {
-    float r2 = r*r;
-    float f = 1 + r2*(kCoeff + kCube * r);
+    float f = 1 + (r*r)*(kCoeff + kCube * r);
     return f;
 }
 
@@ -88,7 +87,7 @@ void main(void)
    // Make the X value the aspect value
    uv.x = uv.x * adsk_input1_frameratio;
    
-   // Compute the disto
+   // Compute the radius
    r = sqrt(uv.x*uv.x + uv.y*uv.y);
    
    // Apply or remove disto
