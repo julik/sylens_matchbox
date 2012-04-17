@@ -34,7 +34,7 @@ float inverse_f(float r)
     vec3[32] lut;
     
     // Flame has no overflow bbox so we can safely max out at the image edge, plus some cushion
-    float max_r = sqrt((adsk_input1_frameratio * adsk_input1_frameratio) + 1) + 1;
+    float max_r = sqrt((adsk_input1_frameratio * adsk_input1_frameratio) + 1) + 0.5;
     float incr = max_r / 32;
     float lut_r = 0;
     float f;
