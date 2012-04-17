@@ -61,6 +61,7 @@ float inverse_f(float r)
     }
 }
 
+// TODO: chromatic abberation
 void main(void)
 {
    vec2 px, uv;
