@@ -17,14 +17,13 @@ uniform bool apply_disto;
 
 // Uniform inputs
 uniform sampler2D input1;
-uniform float adsk_input1_w, adsk_input1_h, adsk_input1_aspect;
+uniform float adsk_input1_w, adsk_input1_h, adsk_input1_aspect, adsk_input1_frameratio;
 uniform float adsk_result_w, adsk_result_h;
 
 float distortion_f(float r) {
-  float f;
-  float r2 = r * r;
-  f = 1 + r2*(kCoeff + kCube * sqrt(r2));
-  return f;
+    float r2 = r*r;
+    float f = 1 + r2*(kCoeff + kCube * r);
+    return f;
 }
 
 float inverse_f(float r)
@@ -36,7 +35,7 @@ float inverse_f(float r)
     vec3[32] lut;
     
     // Flame has no overflow bbox so we can safely max out at the image edge, plus some cushion
-    float max_r = sqrt((adsk_input1_aspect * adsk_input1_aspect) + 1) + 0.1;
+    float max_r = sqrt((adsk_input1_frameratio * adsk_input1_frameratio) + 1) + 0.1;
     float incr = max_r / 32;
     float lut_r = 0;
     float f;
@@ -65,7 +64,8 @@ float inverse_f(float r)
 void main(void)
 {
    vec2 px, uv;
-   float f, r;
+   float f = 1;
+   float r = 1;
    
    px = gl_FragCoord.xy;
    
@@ -73,24 +73,29 @@ void main(void)
    px.x -= (adsk_result_w - adsk_input1_w) / 2;
    px.y -= (adsk_result_h - adsk_input1_h) / 2;
    
-   // Get the pixel coordiante in the input
+   // Push the destination coordinates into the [0..1] range
    uv.x = px.x / adsk_input1_w;
    uv.y = px.y / adsk_input1_h;
    
-   uv -= 0.5;
+   // And to Syntheyes UV which are [-aspect..+aspect] on X and [1..-1] on Y
+   uv.x = (uv.x *2 ) - 1;
+   uv.y = (uv.y *2 ) - 1;
    
-   uv.x -= uShift;
-   uv.y -= vShift;
-   r = sqrt((uv.x*uv.x) +  (uv.y * uv.y * adsk_input1_aspect * adsk_input1_aspect));
-   if(apply_disto){
-       uv = uv * inverse_f(r);  
-   } else {
-       uv = uv * distortion_f(r);  
-   }
-   uv.x += uShift;
-   uv.y += vShift;
+   // Make the X value the aspect value
+   uv.x = uv.x * adsk_input1_frameratio;
    
-   uv += 0.5;
+   // Compute the disto
+   r = sqrt(uv.x*uv.x + uv.y*uv.y);
+   f = distortion_f(r);
+   uv.x = uv.x * f;
+   uv.y = uv.y * f;
+   
+   // Back from aspect to [-aspect..aspect] to [-1..1]
+   uv.x = uv.x / adsk_input1_frameratio;
+   
+   // Back to OGL UV
+   uv.x = (uv.x + 1) / 2;
+   uv.y = (uv.y + 1) / 2;
    
    vec4 tex0 = texture2D(input1, uv);
    gl_FragColor.rgba = vec4(tex0.rgb, 1.0 );
