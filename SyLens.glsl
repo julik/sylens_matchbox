@@ -61,7 +61,6 @@ float inverse_f(float r)
     }
 }
 
-// TODO: chromatic abberation
 void main(void)
 {
    vec2 px, uv;
@@ -98,28 +97,51 @@ void main(void)
        r = r*kOverflow;
    }
    
-   // Apply or remove disto
+   vec2[3] rgb_uvs;
+   
+   // Apply or remove disto, per channel honoring chromatic aberration
    if(apply_disto) {
        f = inverse_f(r);
-       uv.x = uv.x / f;
-       uv.y = uv.y / f;
+       rgb_uvs[0].x = uv.x / (f + chroma_red);
+       rgb_uvs[0].y = uv.y / (f + chroma_red);
+       rgb_uvs[1].x = uv.x / (f + chroma_green);
+       rgb_uvs[1].y = uv.y / (f + chroma_green);
+       rgb_uvs[2].x = uv.x / (f + chroma_blue);
+       rgb_uvs[2].y = uv.y / (f + chroma_blue);
    } else {
        f = distortion_f(r);
-       uv.x = uv.x * f;
-       uv.y = uv.y * f;
+       rgb_uvs[0].x = uv.x * (f + chroma_red);
+       rgb_uvs[0].y = uv.y * (f + chroma_red);
+       rgb_uvs[1].x = uv.x * (f + chroma_green);
+       rgb_uvs[1].y = uv.y * (f + chroma_green);
+       rgb_uvs[2].x = uv.x * (f + chroma_blue);
+       rgb_uvs[2].y = uv.y * (f + chroma_blue);
    }
    
-   // Back from [-aspect..aspect] to [-1..1]
-   uv.x = uv.x / adsk_input1_frameratio;
+   // Convert all the UVs back to the texture space, per color component
+   for(int i=0; i < 3; i++) {
+       uv = rgb_uvs[i];
+       
+       // Back from [-aspect..aspect] to [-1..1]
+       uv.x = uv.x / adsk_input1_frameratio;
+       
+       // Remove UV shifts
+       uv.x -= uShift;
+       uv.y -= vShift;
+       
+       // Back to OGL UV
+       uv.x = (uv.x + 1) / 2;
+       uv.y = (uv.y + 1) / 2;
+       
+       rgb_uvs[i] = uv;
+   }
    
-   // Remove UV shifts
-   uv.x -= uShift;
-   uv.y -= vShift;
+   // Sample the input plate, per component
+   vec4 sampled;
+   sampled.r = texture2D(input1, rgb_uvs[0]).r;
+   sampled.g = texture2D(input1, rgb_uvs[1]).g;
+   sampled.b = texture2D(input1, rgb_uvs[2]).b;
    
-   // Back to OGL UV
-   uv.x = (uv.x + 1) / 2;
-   uv.y = (uv.y + 1) / 2;
-   
-   vec4 tex0 = texture2D(input1, uv);
-   gl_FragColor.rgba = vec4(tex0.rgb, 1.0 );
+   // and assign to the output
+   gl_FragColor.rgba = vec4(sampled.rgb, 1.0 );
 }
