@@ -26,6 +26,7 @@ float distortion_f(float r) {
     return f;
 }
 
+
 float inverse_f(float r)
 {
     
@@ -34,6 +35,7 @@ float inverse_f(float r)
     // So to recap: x will be the radius, y will be the f(x) distortion, and Z will be x * y;
     vec3[32] lut;
     
+    // Since out LUT is shader-global check if it's been computed alrite
     // Flame has no overflow bbox so we can safely max out at the image edge, plus some cushion
     float max_r = sqrt((adsk_input1_frameratio * adsk_input1_frameratio) + 1) + 0.5;
     float incr = max_r / 32;
