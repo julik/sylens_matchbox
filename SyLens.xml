@@ -10,7 +10,7 @@
 
       <Uniform Name="chroma_red" Type="float" DisplayName="Red" Page="0" Col="3" Row="0" Tooltip="Red chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
       <Uniform Name="chroma_green" Type="float" DisplayName="Green" Page="0" Col="3" Row="1" Tooltip="Green chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
-      <Uniform Name="chroma_blue" Type="float" DisplayName="Green" Page="0" Col="3" Row="2" Tooltip="Blue chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
+      <Uniform Name="chroma_blue" Type="float" DisplayName="Blue" Page="0" Col="3" Row="2" Tooltip="Blue chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
       
       <Uniform Index="0" 
          Name="input1"
