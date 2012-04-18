@@ -80,7 +80,7 @@ void main(void)
    uv.y = px.y / adsk_input1_h;
    
        
-   // And to Syntheyes UV which are [-aspect..+aspect] on X and [1..-1] on Y
+   // And to Syntheyes UV which are [1..-1] on both X and Y
    uv.x = (uv.x *2 ) - 1;
    uv.y = (uv.y *2 ) - 1;
    
