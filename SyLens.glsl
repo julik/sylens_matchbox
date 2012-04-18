@@ -88,14 +88,16 @@ void main(void)
    
    // Make the X value the aspect value
    uv.x = uv.x * adsk_input1_frameratio;
+
+   // If we are redistorting, account for the plate oversize
+   if(apply_disto) {
+       uv.x = uv.x / kOverflow;
+       uv.y = uv.y / kOverflow;
+   }
    
    // Compute the radius
    r = sqrt(uv.x*uv.x + uv.y*uv.y);
    
-   // If we are redistorting, account for the plate oversize
-   if(apply_disto) {
-       r = r*kOverflow;
-   }
    
    vec2[3] rgb_uvs;
    
