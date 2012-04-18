@@ -1,0 +1,609 @@
+CorrectionFileVersion 2.1
+ProductGroup flame
+ReservedLine 2013
+CreationDate Wed Apr 18 15:52:14 2012
+
+
+Name correction
+FrameWidth 720
+FrameHeight 576
+Negative no
+Monochrome no
+RedSuppress no
+GreenSuppress no
+BlueSuppress no
+CyanSuppress no
+MagentaSuppress no
+YellowSuppress no
+ClampOutputMode 0
+RangeMin 0
+RangeMax 1
+BlackSlope -0.00999999978
+WhiteSlope 0.00999999978
+CropBox no
+CropLeft 0
+CropRight 719
+CropBottom 0
+CropTop 575
+InvertMatte no
+RedRewire 0
+GreenRewire 1
+BlueRewire 2
+Origin 1
+LuminanceCurve
+	Channel luminance
+		Extrapolation linear
+		Value 1
+		Size 2
+		KeyVersion 2
+		Key 0
+			Frame 0
+			Value 0
+			RHandleX 0.333333343
+			RHandleY 0.333333343
+			LHandleX -0.333333343
+			LHandleY -0.333333343
+			DeleteLock yes
+			CurveMode bezier
+			CurveOrder cubic
+			TangentMode smooth
+			End
+		Key 1
+			Frame 1
+			Value 1
+			RHandleX 1.33333337
+			RHandleY 1.33333337
+			LHandleX 0.666666687
+			LHandleY 0.666666687
+			DeleteLock yes
+			CurveMode bezier
+			CurveOrder cubic
+			TangentMode smooth
+			End
+		Uncollapsed
+		End
+	ChannelEnd
+RedCurve
+	Channel red
+		Extrapolation linear
+		Value 1
+		Size 2
+		KeyVersion 2
+		Key 0
+			Frame 0
+			Value 0
+			RHandleX 0.333333343
+			RHandleY 0.333333343
+			LHandleX -0.333333343
+			LHandleY -0.333333343
+			DeleteLock yes
+			CurveMode bezier
+			CurveOrder cubic
+			TangentMode smooth
+			End
+		Key 1
+			Frame 1
+			Value 1
+			RHandleX 1.33333337
+			RHandleY 1.33333337
+			LHandleX 0.666666687
+			LHandleY 0.666666687
+			DeleteLock yes
+			CurveMode bezier
+			CurveOrder cubic
+			TangentMode smooth
+			End
+		Colour 90 40 40
+		SelectedColour 255 0 0
+		Uncollapsed
+		End
+	ChannelEnd
+GreenCurve
+	Channel green
+		Extrapolation linear
+		Value 1
+		Size 2
+		KeyVersion 2
+		Key 0
+			Frame 0
+			Value 0
+			RHandleX 0.333333343
+			RHandleY 0.333333343
+			LHandleX -0.333333343
+			LHandleY -0.333333343
+			DeleteLock yes
+			CurveMode bezier
+			CurveOrder cubic
+			TangentMode smooth
+			End
+		Key 1
+			Frame 1
+			Value 1
+			RHandleX 1.33333337
+			RHandleY 1.33333337
+			LHandleX 0.666666687
+			LHandleY 0.666666687
+			DeleteLock yes
+			CurveMode bezier
+			CurveOrder cubic
+			TangentMode smooth
+			End
+		Colour 40 90 40
+		SelectedColour 0 255 0
+		Uncollapsed
+		End
+	ChannelEnd
+BlueCurve
+	Channel blue
+		Extrapolation linear
+		Value 1
+		Size 2
+		KeyVersion 2
+		Key 0
+			Frame 0
+			Value 0
+			RHandleX 0.333333343
+			RHandleY 0.333333343
+			LHandleX -0.333333343
+			LHandleY -0.333333343
+			DeleteLock yes
+			CurveMode bezier
+			CurveOrder cubic
+			TangentMode smooth
+			End
+		Key 1
+			Frame 1
+			Value 1
+			RHandleX 1.33333337
+			RHandleY 1.33333337
+			LHandleX 0.666666687
+			LHandleY 0.666666687
+			DeleteLock yes
+			CurveMode bezier
+			CurveOrder cubic
+			TangentMode smooth
+			End
+		Colour 40 40 90
+		SelectedColour 25 25 255
+		Uncollapsed
+		End
+	ChannelEnd
+CWSetup no
+TopChannel
+Channel correction
+	Uncollapsed
+	End
+	Frames 1
+Animation
+	Channel master
+		End
+	Channel master/hue_shift
+		Extrapolation constant
+		Value 0
+		End
+	Channel master/saturation
+		Extrapolation constant
+		Value 100
+		End
+	Channel master/hue_balance
+		Extrapolation constant
+		Value 0
+		End
+	Channel master/gain_balance
+		Extrapolation constant
+		Value 0
+		End
+	Channel master/red/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel master/red/gain
+		Extrapolation constant
+		Value 0
+		End
+	Channel master/red/offset
+		End
+	Channel master/red/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel master/green/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel master/green/gain
+		Extrapolation constant
+		Value 0
+		End
+	Channel master/green/offset
+		End
+	Channel master/green/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel master/blue/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel master/blue/gain
+		Extrapolation constant
+		Value 0
+		End
+	Channel master/blue/offset
+		End
+	Channel master/blue/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel master/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel master/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel master/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel master/offset
+		Extrapolation constant
+		Value 0.178510383
+		End
+	Channel master/pivot
+		Extrapolation constant
+		Value 50
+		End
+	Channel master/histogram/luminance/min_input
+		End
+	Channel master/histogram/luminance/max_input
+		End
+	Channel master/histogram/luminance/min_output
+		End
+	Channel master/histogram/luminance/max_output
+		End
+	Channel master/histogram/red/min_input
+		End
+	Channel master/histogram/red/max_input
+		End
+	Channel master/histogram/red/min_output
+		End
+	Channel master/histogram/red/max_output
+		End
+	Channel master/histogram/green/min_input
+		End
+	Channel master/histogram/green/max_input
+		End
+	Channel master/histogram/green/min_output
+		End
+	Channel master/histogram/green/max_output
+		End
+	Channel master/histogram/blue/min_input
+		End
+	Channel master/histogram/blue/max_input
+		End
+	Channel master/histogram/blue/min_output
+		End
+	Channel master/histogram/blue/max_output
+		End
+	Channel shadows
+		End
+	Channel shadows/hue_shift
+		Extrapolation constant
+		Value 0
+		End
+	Channel shadows/saturation
+		Extrapolation constant
+		Value 100
+		End
+	Channel shadows/hue_balance
+		Extrapolation constant
+		Value 0
+		End
+	Channel shadows/gain_balance
+		Extrapolation constant
+		Value 0
+		End
+	Channel shadows/red/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel shadows/red/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel shadows/red/offset
+		End
+	Channel shadows/red/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel shadows/green/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel shadows/green/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel shadows/green/offset
+		End
+	Channel shadows/green/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel shadows/blue/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel shadows/blue/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel shadows/blue/offset
+		End
+	Channel shadows/blue/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel shadows/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel shadows/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel shadows/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel shadows/offset
+		End
+	Channel shadows/histogram/luminance/min_input
+		End
+	Channel shadows/histogram/luminance/max_input
+		End
+	Channel shadows/histogram/luminance/min_output
+		End
+	Channel shadows/histogram/luminance/max_output
+		End
+	Channel shadows/histogram/red/min_input
+		End
+	Channel shadows/histogram/red/max_input
+		End
+	Channel shadows/histogram/red/min_output
+		End
+	Channel shadows/histogram/red/max_output
+		End
+	Channel shadows/histogram/green/min_input
+		End
+	Channel shadows/histogram/green/max_input
+		End
+	Channel shadows/histogram/green/min_output
+		End
+	Channel shadows/histogram/green/max_output
+		End
+	Channel shadows/histogram/blue/min_input
+		End
+	Channel shadows/histogram/blue/max_input
+		End
+	Channel shadows/histogram/blue/min_output
+		End
+	Channel shadows/histogram/blue/max_output
+		End
+	Channel midtones
+		End
+	Channel midtones/hue_shift
+		Extrapolation constant
+		Value 0
+		End
+	Channel midtones/saturation
+		Extrapolation constant
+		Value 100
+		End
+	Channel midtones/hue_balance
+		Extrapolation constant
+		Value 0
+		End
+	Channel midtones/gain_balance
+		Extrapolation constant
+		Value 0
+		End
+	Channel midtones/red/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel midtones/red/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel midtones/red/offset
+		End
+	Channel midtones/red/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel midtones/green/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel midtones/green/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel midtones/green/offset
+		End
+	Channel midtones/green/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel midtones/blue/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel midtones/blue/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel midtones/blue/offset
+		End
+	Channel midtones/blue/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel midtones/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel midtones/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel midtones/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel midtones/offset
+		End
+	Channel midtones/histogram/luminance/min_input
+		End
+	Channel midtones/histogram/luminance/max_input
+		End
+	Channel midtones/histogram/luminance/min_output
+		End
+	Channel midtones/histogram/luminance/max_output
+		End
+	Channel midtones/histogram/red/min_input
+		End
+	Channel midtones/histogram/red/max_input
+		End
+	Channel midtones/histogram/red/min_output
+		End
+	Channel midtones/histogram/red/max_output
+		End
+	Channel midtones/histogram/green/min_input
+		End
+	Channel midtones/histogram/green/max_input
+		End
+	Channel midtones/histogram/green/min_output
+		End
+	Channel midtones/histogram/green/max_output
+		End
+	Channel midtones/histogram/blue/min_input
+		End
+	Channel midtones/histogram/blue/max_input
+		End
+	Channel midtones/histogram/blue/min_output
+		End
+	Channel midtones/histogram/blue/max_output
+		End
+	Channel highlights
+		End
+	Channel highlights/hue_shift
+		Extrapolation constant
+		Value 0
+		End
+	Channel highlights/saturation
+		Extrapolation constant
+		Value 100
+		End
+	Channel highlights/hue_balance
+		Extrapolation constant
+		Value 0
+		End
+	Channel highlights/gain_balance
+		Extrapolation constant
+		Value 0
+		End
+	Channel highlights/red/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel highlights/red/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel highlights/red/offset
+		End
+	Channel highlights/red/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel highlights/green/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel highlights/green/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel highlights/green/offset
+		End
+	Channel highlights/green/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel highlights/blue/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel highlights/blue/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel highlights/blue/offset
+		End
+	Channel highlights/blue/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel highlights/gamma
+		Extrapolation constant
+		Value 1
+		End
+	Channel highlights/contrast
+		Extrapolation constant
+		Value 100
+		End
+	Channel highlights/gain
+		Extrapolation constant
+		Value 100
+		End
+	Channel highlights/offset
+		End
+	Channel highlights/histogram/luminance/min_input
+		End
+	Channel highlights/histogram/luminance/max_input
+		End
+	Channel highlights/histogram/luminance/min_output
+		End
+	Channel highlights/histogram/luminance/max_output
+		End
+	Channel highlights/histogram/red/min_input
+		End
+	Channel highlights/histogram/red/max_input
+		End
+	Channel highlights/histogram/red/min_output
+		End
+	Channel highlights/histogram/red/max_output
+		End
+	Channel highlights/histogram/green/min_input
+		End
+	Channel highlights/histogram/green/max_input
+		End
+	Channel highlights/histogram/green/min_output
+		End
+	Channel highlights/histogram/green/max_output
+		End
+	Channel highlights/histogram/blue/min_input
+		End
+	Channel highlights/histogram/blue/max_input
+		End
+	Channel highlights/histogram/blue/min_output
+		End
+	Channel highlights/histogram/blue/max_output
+		End
+	ChannelEnd
+End

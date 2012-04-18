@@ -4,12 +4,18 @@
       <Uniform Name="kCube" Type="float" DisplayName="Cubic" Page="0" Col="0" Row="1" Tooltip="Cubic distortion" Inc="0.0001" Default="0.0078" Min="-0.1" Max="0.1" ResDependent="None" />
       <Uniform Name="uShift" Type="float" DisplayName="X Shift" Page="0" Col="1" Row="0" Tooltip="Horizontal centerpoint shift" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
       <Uniform Name="vShift" Type="float" DisplayName="Y Shift" Page="0" Col="1" Row="1" Tooltip="Vertical centerpoint shift" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
-      <Uniform Name="apply_disto" Type="bool" Row="1" Page="0" Col="0" Row="2" Default="False" Tooltip="Apply distortion instead of removing it" DisplayName="Apply Distortion" />
+      
+      <Uniform Name="apply_disto" Type="bool" Page="0" Row="0" Col="2" Default="False" Tooltip="Apply distortion instead of removing it" DisplayName="Apply Distortion" />
+      <Uniform Name="kOverflow" Type="float" Page="0" Row="1" Col="2" Default="1.000" Inc="0.01" Min="0.5" Max="3.0" Tooltip="Specify how much bigger your input is than the redistorted result" DisplayName="Oversize factor" />
+
+      <Uniform Name="chroma_red" Type="float" DisplayName="Red" Page="0" Col="3" Row="0" Tooltip="Red chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
+      <Uniform Name="chroma_green" Type="float" DisplayName="Green" Page="0" Col="3" Row="1" Tooltip="Green chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
+      <Uniform Name="chroma_blue" Type="float" DisplayName="Green" Page="0" Col="3" Row="2" Tooltip="Blue chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
       
       <Uniform Index="0" 
          Name="input1"
          DisplayName="Front" 
-         Tooltip="" 
+         Tooltip="Your plate" 
          Type="sampler2D" 
          NoInput="Error"
          Mipmaps="False" 
@@ -23,6 +29,11 @@
       <Col Page="0" Col="0" Name="Distortion">
       </Col>
       <Col Page="0" Col="1" Name="Centerpoint shift">
+      </Col>
+      <Col Page="0" Col="2" Name="Redistortion">
+      </Col>
+      
+      <Col Page="0" Col="3" Name="Chromatics">
       </Col>
    </Page>
 </ShaderNodePreset>
