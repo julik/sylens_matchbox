@@ -12,7 +12,7 @@
 */
 
 // Controls
-uniform float kCoeff, kCube, kOverflow, uShift, vShift;
+uniform float kCoeff, kCube, uShift, vShift;
 uniform float chroma_red, chroma_green, chroma_blue;
 uniform bool apply_disto;
 
@@ -33,15 +33,15 @@ float inverse_f(float r)
     // Build a lookup table on the radius, as a fixed-size table.
     // We will use a vec3 since we will store the multipled number in the Z coordinate.
     // So to recap: x will be the radius, y will be the f(x) distortion, and Z will be x * y;
-    vec3[32] lut;
+    vec3[48] lut;
     
     // Since out LUT is shader-global check if it's been computed alrite
     // Flame has no overflow bbox so we can safely max out at the image edge, plus some cushion
-    float max_r = sqrt((adsk_input1_frameratio * adsk_input1_frameratio) + 1) + 0.5;
-    float incr = max_r / 32;
+    float max_r = sqrt((adsk_input1_frameratio * adsk_input1_frameratio) + 1) + 0.1;
+    float incr = max_r / 48;
     float lut_r = 0;
     float f;
-    for(int i=0; i < 32; i++) {
+    for(int i=0; i < 48; i++) {
         f = distortion_f(lut_r);
         lut[i] = vec3(lut_r, f, lut_r * f);
         lut_r += incr;
@@ -52,7 +52,7 @@ float inverse_f(float r)
     float t;
     
     // Now find the nehgbouring elements
-    for(int i=0; i < 32; i++) {
+    for(int i=0; i < 48; i++) {
         if(lut[i].z > r && lut[i-1].z < r) {
             // found!
             df = lut[i+1].y - lut[i].y;
@@ -75,6 +75,7 @@ void main(void)
    px.x -= (adsk_result_w - adsk_input1_w) / 2;
    px.y -= (adsk_result_h - adsk_input1_h) / 2;
    
+   
    // Push the destination coordinates into the [0..1] range
    uv.x = px.x / adsk_input1_w;
    uv.y = px.y / adsk_input1_h;
@@ -91,15 +92,14 @@ void main(void)
    // Make the X value the aspect value
    uv.x = uv.x * adsk_input1_frameratio;
 
-   // If we are redistorting, account for the plate oversize
-   if(apply_disto) {
-       uv.x = uv.x / kOverflow;
-       uv.y = uv.y / kOverflow;
-   }
    
    // Compute the radius
    r = sqrt(uv.x*uv.x + uv.y*uv.y);
    
+   // If we are redistorting, account for the oversize plate in the input
+   if(apply_disto) {
+       r = r / (float(adsk_input1_w) / float(adsk_result_w));
+   }
    
    vec2[3] rgb_uvs;
    
