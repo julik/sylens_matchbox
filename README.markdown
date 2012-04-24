@@ -6,6 +6,21 @@ To use it, copy the .glsl, the .glsl.p and the .xml files somewhere where your F
 can access them and load the shader into Matchbox. Afterwards, dial in the parameters computed in Syntheyes
 to apply or remove distortion (the default is "remove").
 
+## Dealing with overscan when removing distortion
+
+When you are undistorting images it sometimes produces oversize images. By default the overflow pixels will be
+simply cropped away, however if you expand the **Output Size** of your shader, you will see that the output
+will still be centered in your canvas. So, to recover the overflow pixels, expand your output until all the pixels are
+covered.
+
+Remember that the undistorted plate will always have the same aspect ratio as the original.
+
+## Dealing with overscan when applying distortion
+
+When applying distortion the reverse process must be observed - you want to get a redistorted image that has the same
+size as your original distorted source. To achieve this, feed the shader an oversize plate as input and 
+simply **reduce** your **Output Size** in the settings. The shader will compute all the needed parameters
+and your output will match the distorted source.
 
 ## License
 
