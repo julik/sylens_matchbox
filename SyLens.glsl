@@ -63,6 +63,11 @@ float inverse_f(float r)
     }
 }
 
+float chromaticize(float f, float chromatic)
+{
+    return f + (f * chromatic);
+}
+
 void main(void)
 {
    vec2 px, uv;
@@ -106,20 +111,20 @@ void main(void)
    // Apply or remove disto, per channel honoring chromatic aberration
    if(apply_disto) {
        f = inverse_f(r);
-       rgb_uvs[0].x = uv.x / (f + chroma_red);
-       rgb_uvs[0].y = uv.y / (f + chroma_red);
-       rgb_uvs[1].x = uv.x / (f + chroma_green);
-       rgb_uvs[1].y = uv.y / (f + chroma_green);
-       rgb_uvs[2].x = uv.x / (f + chroma_blue);
-       rgb_uvs[2].y = uv.y / (f + chroma_blue);
+       rgb_uvs[0].x = uv.x / chromaticize(f, chroma_red);
+       rgb_uvs[0].y = uv.y / chromaticize(f, chroma_red);
+       rgb_uvs[1].x = uv.x / chromaticize(f, chroma_green);
+       rgb_uvs[1].y = uv.y / chromaticize(f, chroma_green);
+       rgb_uvs[2].x = uv.x / chromaticize(f, chroma_blue);
+       rgb_uvs[2].y = uv.y / chromaticize(f, chroma_blue);
    } else {
        f = distortion_f(r);
-       rgb_uvs[0].x = uv.x * (f + chroma_red);
-       rgb_uvs[0].y = uv.y * (f + chroma_red);
-       rgb_uvs[1].x = uv.x * (f + chroma_green);
-       rgb_uvs[1].y = uv.y * (f + chroma_green);
-       rgb_uvs[2].x = uv.x * (f + chroma_blue);
-       rgb_uvs[2].y = uv.y * (f + chroma_blue);
+       rgb_uvs[0].x = uv.x * chromaticize(f, chroma_red);
+       rgb_uvs[0].y = uv.y * chromaticize(f, chroma_red);
+       rgb_uvs[1].x = uv.x * chromaticize(f, chroma_green);
+       rgb_uvs[1].y = uv.y * chromaticize(f, chroma_green);
+       rgb_uvs[2].x = uv.x * chromaticize(f, chroma_blue);
+       rgb_uvs[2].y = uv.y * chromaticize(f, chroma_blue);
    }
    
    // Convert all the UVs back to the texture space, per color component
