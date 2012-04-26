@@ -63,9 +63,19 @@ float inverse_f(float r)
     }
 }
 
-float chromaticize(float f, float chromatic)
+float aberrate(float f, float chroma)
 {
-    return f + (f * chromatic);
+   return f + (f * chroma);
+}
+
+vec3 chromaticize_and_invert(float f)
+{
+   vec3 rgb_f = vec3(aberrate(f, chroma_red), aberrate(f, chroma_green), aberrate(f, chroma_blue));
+   // We need to DIVIDE by F when we redistort, and x / y == x * (1 / y)
+   if(apply_disto) {
+      rgb_f = 1 / rgb_f;
+   }
+   return rgb_f;
 }
 
 void main(void)
@@ -79,7 +89,6 @@ void main(void)
    // Make sure we are still centered
    px.x -= (adsk_result_w - adsk_input1_w) / 2;
    px.y -= (adsk_result_h - adsk_input1_h) / 2;
-   
    
    // Push the destination coordinates into the [0..1] range
    uv.x = px.x / adsk_input1_w;
@@ -96,7 +105,6 @@ void main(void)
    
    // Make the X value the aspect value
    uv.x = uv.x * adsk_input1_frameratio;
-
    
    // Compute the radius
    r = sqrt(uv.x*uv.x + uv.y*uv.y);
@@ -116,12 +124,7 @@ void main(void)
    vec2[3] rgb_uvs = vec2[](uv, uv, uv);
    
    // Compute distortions per component
-   vec3 rgb_f = vec3(chromaticize(f, chroma_red), chromaticize(f, chroma_green), chromaticize(f, chroma_blue));
-   
-   // We need to DIVIDE by F when we redistort, and x / y == x * (1 / y)
-   if(apply_disto){
-      rgb_f = vec3(1,1,1) / rgb_f;
-   }
+   vec3 rgb_f = chromaticize_and_invert(f);
    
    // Apply the disto coefficients, per component
    rgb_uvs[0] = rgb_uvs[0] * rgb_f.rr;
