@@ -106,9 +106,6 @@ void main(void)
        r = r / (float(adsk_input1_w) / float(adsk_result_w));
    }
    
-   vec2[3] rgb_uvs;
-   vec3 rgb_f;
-   
    // Apply or remove disto, per channel honoring chromatic aberration
    if(apply_disto) {
       f = inverse_f(r);
@@ -116,16 +113,20 @@ void main(void)
       f = distortion_f(r);
    }
    
-   rgb_f = vec3(chromaticize(f, chroma_red), chromaticize(f, chroma_green), chromaticize(f, chroma_blue));
+   vec2[3] rgb_uvs = vec2[](uv, uv, uv);
+   
+   // Compute distortions per component
+   vec3 rgb_f = vec3(chromaticize(f, chroma_red), chromaticize(f, chroma_green), chromaticize(f, chroma_blue));
    
    // We need to DIVIDE by F when we redistort, and x / y == x * (1 / y)
    if(apply_disto){
       rgb_f = vec3(1,1,1) / rgb_f;
    }
    
-   rgb_uvs[0] = rgb_uvs[0] * vec2(rgb_f.x rgb_f.x);
-   rgb_uvs[1] = rgb_uvs[1] * vec2(rgb_f.y rgb_f.y);
-   rgb_uvs[2] = rgb_uvs[2] * vec2(rgb_f.z rgb_f.z);
+   // Apply the disto coefficients, per component
+   rgb_uvs[0] = rgb_uvs[0] * vec2(rgb_f.r, rgb_f.r);
+   rgb_uvs[1] = rgb_uvs[1] * vec2(rgb_f.g, rgb_f.g);
+   rgb_uvs[2] = rgb_uvs[2] * vec2(rgb_f.b, rgb_f.b);
    
    // Convert all the UVs back to the texture space, per color component
    for(int i=0; i < 3; i++) {
