@@ -124,9 +124,9 @@ void main(void)
    }
    
    // Apply the disto coefficients, per component
-   rgb_uvs[0] = rgb_uvs[0] * vec2(rgb_f.r, rgb_f.r);
-   rgb_uvs[1] = rgb_uvs[1] * vec2(rgb_f.g, rgb_f.g);
-   rgb_uvs[2] = rgb_uvs[2] * vec2(rgb_f.b, rgb_f.b);
+   rgb_uvs[0] = rgb_uvs[0] * rgb_f.rr;
+   rgb_uvs[1] = rgb_uvs[1] * rgb_f.gg;
+   rgb_uvs[2] = rgb_uvs[2] * rgb_f.bb;
    
    // Convert all the UVs back to the texture space, per color component
    for(int i=0; i < 3; i++) {
