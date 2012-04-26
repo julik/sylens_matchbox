@@ -4,6 +4,8 @@
   Original Lens Distortion Algorithm from SSontech (Syntheyes)
   http://www.ssontech.com/content/lensalg.htm
   
+  r2 is radius squared.
+  
   r2 = image_aspect*image_aspect*u*u + v*v
   f = 1 + r2*(k + kcube*sqrt(r2))
   u' = f*u

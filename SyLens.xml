@@ -1,12 +1,24 @@
 <ShaderNodePreset Name="SyLens" Description="Syntheyes Lens Disto" SupportsAdaptiveDegradation="False">
    <Shader Index="1" OutputBitDepth="Output">
-      <Uniform Name="kCoeff" Type="float" DisplayName="Quartic" Page="0" Col="0" Row="0" Tooltip="Quartic distortion"  Inc="0.0001" Default="-0.0236" Min="-0.1" Max="0.1" ResDependent="None" />
-      <Uniform Name="kCube" Type="float" DisplayName="Cubic" Page="0" Col="0" Row="1" Tooltip="Cubic distortion" Inc="0.0001" Default="0.0078" Min="-0.1" Max="0.1" ResDependent="None" />
-      <Uniform Name="uShift" Type="float" DisplayName="X Shift" Page="0" Col="1" Row="0" Tooltip="Horizontal centerpoint shift" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
-      <Uniform Name="vShift" Type="float" DisplayName="Y Shift" Page="0" Col="1" Row="1" Tooltip="Vertical centerpoint shift" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
+      <Uniform Name="kCoeff" Type="float" DisplayName="Quartic" Page="0" Col="0" Row="0" 
+        Tooltip='Quartic distortion coefficient (the K coefficient). This can be computed automatically in Syntheyes when using "Calculate Lens DIstortion"'
+        Inc="0.0001" Default="-0.0236" Min="-0.1" Max="0.1" ResDependent="None" />
+        
+      <Uniform Name="kCube" Type="float" DisplayName="Cubic" Page="0" Col="0" Row="1"
+        Tooltip="Cubic distortion (Kcube). Apply this if you are dealing with mustache distortion. Normally you would levae it at 0."
+        Inc="0.0001" Default="0.0" Min="-0.1" Max="0.1" ResDependent="None" />
+        
+      <Uniform Name="uShift" Type="float" DisplayName="X Shift" Page="0" Col="1" Row="0"
+        Tooltip="If the optical center of your lens is offset relative to the sensor/film back center add some shift here to distort off-center horizontally."
+        Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
+        
+      <Uniform Name="vShift" Type="float" DisplayName="Y Shift" Page="0" Col="1" Row="1"
+        Tooltip="If the optical center of your lens is offset relative to the sensor/film back center add some shift here to distort off-center vertically."
+        Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
       
-      <Uniform Name="apply_disto" Type="bool" Page="0" Row="0" Col="2" Default="False" Tooltip="Apply distortion instead of removing it" DisplayName="Apply Distortion" />
-
+      <Uniform Name="apply_disto" Type="bool" Page="0" Row="0" Col="2" Default="False" Tooltip="Apply distortion instead of removing it. Make sure you have enough overscan in your input!"
+        DisplayName="Apply Distortion" />
+        
       <Uniform Name="chroma_red" Type="float" DisplayName="Red" Page="0" Col="3" Row="0" Tooltip="Red chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
       <Uniform Name="chroma_green" Type="float" DisplayName="Green" Page="0" Col="3" Row="1" Tooltip="Green chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
       <Uniform Name="chroma_blue" Type="float" DisplayName="Blue" Page="0" Col="3" Row="2" Tooltip="Blue chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
