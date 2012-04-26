@@ -13,7 +13,7 @@ Afterwards, dial in the parameters computed in Syntheyes to apply or remove dist
 ## Dealing with overscan when removing distortion
 
 When you are undistorting images it sometimes produces oversize images. By default the overflow pixels will be
-simply cropped away, however if you expand the **Output Size** of your shader, you will see that the output
+simply cropped away, however if you expand the **Canvas Resolution** of your shader, you will see that the output
 will still be centered in your canvas. So, to recover the overflow pixels, expand your output until all the pixels are
 covered.
 
@@ -23,7 +23,7 @@ Remember that the undistorted plate will always have the same aspect ratio as th
 
 When applying distortion the reverse process must be observed - you want to get a redistorted image that has the same
 size as your original distorted source. To achieve this, feed the shader an oversize plate as input and 
-simply **reduce** your **Output Size** in the settings. The shader will compute all the needed parameters
+simply **reduce** your **Canvas Resolution** in the settings. The shader will compute all the needed parameters
 and your output will match the distorted source.
 
 ## Use in setups
