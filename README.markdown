@@ -1,10 +1,14 @@
 ## Basics
 
-This shader will undistort and redistort footage according to the Syntheyes model.
+This shader will undistort and redistort footage according to the Syntheyes model. It's called SyLens after it's more
+powerful cousin, [SyLens for Nuke.](http://github.com/julik/sylens)
+
+## Installation
 
 To use it, copy the .glsl, the .glsl.p and the .xml files somewhere where your Flame/Smoke system
-can access them and load the shader into Matchbox. Afterwards, dial in the parameters computed in Syntheyes
-to apply or remove distortion (the default is "remove").
+can access them. The default location of all the stock Matchbox shaders is `/usr/discreet/<version>/matchbox`,
+so for example for Flame 2013 it will be `/usr/discreet/flame_2013/matchbox`. Once the shader is there, load it into Matchbox.
+Afterwards, dial in the parameters computed in Syntheyes to apply or remove distortion (the default is "remove").
 
 ## Dealing with overscan when removing distortion
 
@@ -21,6 +25,11 @@ When applying distortion the reverse process must be observed - you want to get 
 size as your original distorted source. To achieve this, feed the shader an oversize plate as input and 
 simply **reduce** your **Output Size** in the settings. The shader will compute all the needed parameters
 and your output will match the distorted source.
+
+## Use in setups
+
+Do not worry about always using the latest version of the shader - the shader you use will actually be **copied** to your setup
+so there is no problem versioning it.
 
 ## License
 
