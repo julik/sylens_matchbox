@@ -5,7 +5,7 @@
         Inc="0.0001" Default="-0.0236" Min="-0.1" Max="0.1" ResDependent="None" />
         
       <Uniform Name="kCube" Type="float" DisplayName="Cubic" Page="0" Col="0" Row="1"
-        Tooltip="Cubic distortion (Kcube). Apply this if you are dealing with mustache distortion. Normally you would levae it at 0."
+        Tooltip="Cubic distortion (Kcube). Apply this if you are dealing with mustache distortion. Normally you would leave it at 0."
         Inc="0.0001" Default="0.0" Min="-0.1" Max="0.1" ResDependent="None" />
         
       <Uniform Name="uShift" Type="float" DisplayName="X Shift" Page="0" Col="1" Row="0"
