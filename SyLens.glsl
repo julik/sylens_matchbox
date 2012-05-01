@@ -105,13 +105,14 @@ void main(void)
    uv.x += uShift;
    uv.y += vShift;
    
-   // Make the X value the aspect value
+   // Make the X value the aspect value, so that the X coordinates go to [-aspect..aspect]
    uv.x = uv.x * adsk_input1_frameratio;
    
    // Compute the radius
    r = sqrt(uv.x*uv.x + uv.y*uv.y);
    
-   // If we are redistorting, account for the oversize plate in the input
+   // If we are redistorting, account for the oversize plate in the input, assume that
+   // the input aspect is the same
    if(apply_disto) {
        r = r / (float(adsk_input1_w) / float(adsk_result_w));
    }
