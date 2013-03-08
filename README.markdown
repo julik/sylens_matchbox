@@ -5,10 +5,17 @@ powerful cousin, [SyLens for Nuke.](http://github.com/julik/sylens)
 
 ## Installation
 
-To use it, copy the .glsl, the .glsl.p and the .xml files somewhere where your Flame/Smoke system
-can access them. The default location of all the stock Matchbox shaders is `/usr/discreet/<version>/matchbox`,
-so for example for Flame 2013 it will be `/usr/discreet/flame_2013/matchbox`. Once the shader is there, load it into Matchbox.
-Afterwards, dial in the parameters computed in Syntheyes to apply or remove distortion (the default is "remove").
+Download and unpack the repository, then open a Terminal and cd into the directory where you have unpacked it.
+From there, run the installer shell script:
+
+	$ ./installer.sh
+
+Since the matchbox directories are protected from non-admin users by default, copying will be done as sudo - so either run the installer
+as root or be ready to enter your password. On the Mac, your main user will be a sudoer by default. On Linux, your Flame/Smoke user will likely NOT
+be a sudoer so you will have to run the installer as root.
+
+The installer script will copy the shader into all of the versions of the software that support Matchbox shaders. Once you grab a fresh Matchbox node the SyLens
+shader icon will show up in your Matchbox shaders list.
 
 ## Dealing with overscan when removing distortion
 
