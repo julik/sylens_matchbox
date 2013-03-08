@@ -1,50 +1,29 @@
-<ShaderNodePreset Name="SyLens" Description="Syntheyes Lens Disto" SupportsAdaptiveDegradation="False">
-   <Shader Index="1" OutputBitDepth="Output">
-      <Uniform Name="kCoeff" Type="float" DisplayName="Quartic" Page="0" Col="0" Row="0" 
-        Tooltip='Quartic distortion coefficient (the K coefficient). This can be computed automatically in Syntheyes when using "Calculate Lens DIstortion"'
-        Inc="0.0001" Default="-0.0236" Min="-0.1" Max="0.1" ResDependent="None" />
-        
-      <Uniform Name="kCube" Type="float" DisplayName="Cubic" Page="0" Col="0" Row="1"
-        Tooltip="Cubic distortion (Kcube). Apply this if you are dealing with mustache distortion. Normally you would leave it at 0."
-        Inc="0.0001" Default="0.0" Min="-0.1" Max="0.1" ResDependent="None" />
-        
-      <Uniform Name="uShift" Type="float" DisplayName="X Shift" Page="0" Col="1" Row="0"
-        Tooltip="If the optical center of your lens is offset relative to the sensor/film back center add some shift here to distort off-center horizontally."
-        Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
-        
-      <Uniform Name="vShift" Type="float" DisplayName="Y Shift" Page="0" Col="1" Row="1"
-        Tooltip="If the optical center of your lens is offset relative to the sensor/film back center add some shift here to distort off-center vertically."
-        Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
-      
-      <Uniform Name="apply_disto" Type="bool" Page="0" Row="0" Col="2" Default="False" Tooltip="Apply distortion instead of removing it. Make sure you have enough overscan in your input!"
-        DisplayName="Apply Distortion" />
-        
-      <Uniform Name="chroma_red" Type="float" DisplayName="Red" Page="0" Col="3" Row="0" Tooltip="Red chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
-      <Uniform Name="chroma_green" Type="float" DisplayName="Green" Page="0" Col="3" Row="1" Tooltip="Green chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
-      <Uniform Name="chroma_blue" Type="float" DisplayName="Blue" Page="0" Col="3" Row="2" Tooltip="Blue chroma aberration multiplier" Inc="0.0001" Default="0.0000" Min="-1.0" Max="1.0" ResDependent="None" />
-      
-      <Uniform Index="0" 
-         Name="input1"
-         DisplayName="Front" 
-         Tooltip="Your plate" 
-         Type="sampler2D" 
-         NoInput="Error"
-         Mipmaps="False" 
-         GL_TEXTURE_WRAP_T="GL_CLAMP" 
-         GL_TEXTURE_WRAP_S="GL_CLAMP" 
-         GL_TEXTURE_MAG_FILTER="GL_LINEAR" 
-         GL_TEXTURE_MIN_FILTER="GL_LINEAR">
+
+<ShaderNodePreset SupportsAdaptiveDegradation="0" Description="" Name="Preset Name">
+   <Shader OutputBitDepth="Output" Index="1">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="0" Col="0" Page="0" DisplayName="chroma_green" Type="float" Name="chroma_green">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="1" Col="0" Page="0" DisplayName="kCube" Type="float" Name="kCube">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="2" Col="0" Page="0" DisplayName="chroma_blue" Type="float" Name="chroma_blue">
+      </Uniform>
+      <Uniform Row="3" Col="0" Page="0" Default="False" Tooltip="" DisplayName="apply_disto" Type="bool" Name="apply_disto">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="4" Col="0" Page="0" DisplayName="chroma_red" Type="float" Name="chroma_red">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="0" Col="1" Page="0" DisplayName="kCoeff" Type="float" Name="kCoeff">
+      </Uniform>
+      <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="input1" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_REPEAT" GL_TEXTURE_WRAP_S="GL_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="input1">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="1" Col="1" Page="0" DisplayName="uShift" Type="float" Name="uShift">
+      </Uniform>
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="2" Col="1" Page="0" DisplayName="vShift" Type="float" Name="vShift">
       </Uniform>
    </Shader>
-   <Page Page="0" Name="SyLens">
-      <Col Page="0" Col="0" Name="Distortion">
+   <Page Name="Page 1" Page="0">
+      <Col Name="Column 1" Col="0" Page="0">
       </Col>
-      <Col Page="0" Col="1" Name="Centerpoint shift">
-      </Col>
-      <Col Page="0" Col="2" Name="Redistortion">
-      </Col>
-      
-      <Col Page="0" Col="3" Name="Chromatics">
+      <Col Name="Column 2" Col="1" Page="0">
       </Col>
    </Page>
 </ShaderNodePreset>
