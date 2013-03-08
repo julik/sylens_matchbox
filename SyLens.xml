@@ -5,25 +5,36 @@
       </Uniform>
 
       <!-- First column (0) -->
-      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="0" Col="0" Page="0" DisplayName="kCoeff" Type="float" Name="kCoeff">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" 
+          Tooltip="Quartic distortion coefficient (the K coefficient). This can be computed automatically in Syntheyes when using 'Calculate Lens Distortion'"
+          Row="0" Col="0" Page="0" DisplayName="Quartic" Type="float" Name="kCoeff">
       </Uniform>
-      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="1" Col="0" Page="0" DisplayName="kCube" Type="float" Name="kCube">
+      
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01"
+        Tooltip="Cubic distortion (Kcube). Apply this if you are dealing with mustache distortion. Normally you would leave it at 0."
+        Row="1" Col="0" Page="0" DisplayName="Cubic" Type="float" Name="kCube">
       </Uniform>
       
       <!-- Second column (1) -->
-      <Uniform                                                      Default="False"          Tooltip="" Row="0" Col="1" Page="0" DisplayName="apply_disto" Type="bool" Name="apply_disto">
+      <Uniform                                                      Default="False"          
+        Tooltip="Apply distortion instead of removing it. Make sure you have enough overscan in your input!"
+        Row="0" Col="1" Page="0" DisplayName="apply_disto" Type="bool" Name="apply_disto">
       </Uniform>
-      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="1" Col="1" Page="0" DisplayName="uShift" Type="float" Name="uShift">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" 
+        Tooltip="If the optical center of your lens is offset relative to the sensor/film back center add some shift here to distort off-center horizontally." 
+        Row="1" Col="1" Page="0" DisplayName="uShift" Type="float" Name="uShift">
       </Uniform>
-      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="2" Col="1" Page="0" DisplayName="vShift" Type="float" Name="vShift">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" 
+        Tooltip="If the optical center of your lens is offset relative to the sensor/film back center add some shift here to distort off-center vertically." 
+        Row="2" Col="1" Page="0" DisplayName="vShift" Type="float" Name="vShift">
       </Uniform>
       
       <!-- Third column (2) -->
-      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="0" Col="2" Page="0" DisplayName="chroma_red" Type="float" Name="chroma_red">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="R chroma aberration multiplier" Row="0" Col="2" Page="0" DisplayName="chroma_red" Type="float" Name="chroma_red">
       </Uniform>
-      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="1" Col="2" Page="0" DisplayName="chroma_green" Type="float" Name="chroma_green">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="G chroma aberration multiplier" Row="1" Col="2" Page="0" DisplayName="chroma_green" Type="float" Name="chroma_green">
       </Uniform>
-      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="" Row="2" Col="2" Page="0" DisplayName="chroma_blue" Type="float" Name="chroma_blue">
+      <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="B chroma aberration multiplier" Row="2" Col="2" Page="0" DisplayName="chroma_blue" Type="float" Name="chroma_blue">
       </Uniform>
    </Shader>
    <Page Name="Page 1" Page="0">
