@@ -17,6 +17,9 @@ be a sudoer so you will have to run the installer as root.
 The installer script will copy the shader into all of the versions of the software that support Matchbox shaders. Once you grab a fresh Matchbox node the SyLens
 shader icon will show up in your Matchbox shaders list.
 
+You will need to rerun the installer everytime you install an update for your IFFS applications (since every new install
+creates a new `matchbox` directory) 
+
 ## Dealing with overscan when removing distortion
 
 When you are undistorting images it sometimes produces oversize images. By default the overflow pixels will be
