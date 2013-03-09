@@ -5,7 +5,7 @@ powerful cousin, [SyLens for Nuke.](http://github.com/julik/sylens)
 
 ## Installation
 
-Download and unpack the repository, then open a Terminal and cd into the directory where you have unpacked it.
+[Download](https://github.com/julik/sylens_matchbox/archive/master.zip) and unpack the repository, then open a Terminal and cd into the directory where you have unpacked it.
 From there, run the installer shell script:
 
 	$ ./installer.sh
