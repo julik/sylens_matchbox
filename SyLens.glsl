@@ -49,18 +49,16 @@ float inverse_f(float r)
         lut_r += incr;
     }
     
-    float df;
-    float dr;
     float t;
-    
     // Now find the nehgbouring elements
-    for(int i=0; i < 48; i++) {
-        if(lut[i].z > r && lut[i-1].z < r) {
-            // found!
-            df = lut[i+1].y - lut[i].y;
-            dr = lut[i+1].z - lut[i].z;
-            t = (r - lut[i].z) / dr;
-            return lut[i].y + (df * t);
+    // only iterate to 46 since we will need
+    // 47 as i+1
+    for(int i=0; i < 47; i++) {
+        if(lut[i].z < r && lut[i+1].z > r) {
+            // BAM! our value is between these two segments
+            // get the T interpolant and mix
+            t = (r - lut[i].z) / (lut[i+1].z - lut[i]).z;
+            return mix(lut[i].y, lut[i+1].y, t );
         }
     }
 }
