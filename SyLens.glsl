@@ -28,14 +28,14 @@ float distortion_f(float r) {
     return f;
 }
 
-
-float inverse_f(float r)
+// Returns the F multiplier for the passed distorted radius
+float inverse_f(float r_distorted)
 {
     
     // Build a lookup table on the radius, as a fixed-size table.
-    // We will use a vec3 since we will store the multipled number in the Z coordinate.
-    // So to recap: x will be the radius, y will be the f(x) distortion, and Z will be x * y;
-    vec3[48] lut;
+    // We will use a vec2 since we will store the F (distortion coefficient at this R)
+    // and the result of F*radius
+    vec2[48] lut;
     
     // Since out LUT is shader-global check if it's been computed alrite
     // Flame has no overflow bbox so we can safely max out at the image edge, plus some cushion
@@ -45,7 +45,7 @@ float inverse_f(float r)
     float f;
     for(int i=0; i < 48; i++) {
         f = distortion_f(lut_r);
-        lut[i] = vec3(lut_r, f, lut_r * f);
+        lut[i] = vec2(f, lut_r * f);
         lut_r += incr;
     }
     
@@ -54,11 +54,11 @@ float inverse_f(float r)
     // only iterate to 46 since we will need
     // 47 as i+1
     for(int i=0; i < 47; i++) {
-        if(lut[i].z < r && lut[i+1].z > r) {
-            // BAM! our value is between these two segments
+        if(lut[i].y < r_distorted && lut[i+1].y > r_distorted) {
+            // BAM! our distorted radius is between these two
             // get the T interpolant and mix
-            t = (r - lut[i].z) / (lut[i+1].z - lut[i]).z;
-            return mix(lut[i].y, lut[i+1].y, t );
+            t = (r_distorted - lut[i].y) / (lut[i+1].y - lut[i]).y;
+            return mix(lut[i].x, lut[i+1].x, t );
         }
     }
 }
