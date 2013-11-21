@@ -22,23 +22,22 @@ creates a new `matchbox` directory)
 
 ## Dealing with overscan when removing distortion
 
-**For Flame/Smoke pre-Anniversary-edition:** When you are undistorting images it sometimes produces oversize images. By default the overflow pixels will be
+On the right of the matchbox UI you have the *Input size* parameters. Set them *manually* to the pixel dimensions of the plate you feed to the shader.
+It's supposed to be autodetected but due to a nasty bug in the software you have to enter it by hand. 
+
+When you are undistorting images it sometimes produces oversize images. By default the overflow pixels will be
 simply cropped away, however if you expand the **Canvas Resolution** of your shader, you will see that the output
 will still be centered in your canvas. So, to recover the overflow pixels, expand your output until all the pixels are
 covered.
 
 Remember that the undistorted plate will always have the same aspect ratio as the original.
 
-**For Flame/Smoke AE:** input size detection is broken due to a regression introduced in the AE versions, so overscan rendering will not work.
-
 ## Dealing with overscan when applying distortion
 
-**For Flame/Smoke pre-Anniversary-edition:** When applying distortion the reverse process must be observed - you want to get a redistorted image that has the same
-size as your original distorted source. To achieve this, feed the shader an oversize plate as input and 
+On the right of the matchbox UI you have the *Input size* parameters. Set them *manually* to the pixel dimensions of the plate you feed to the shader.
+It's supposed to be autodetected but due to a nasty bug in the software you have to enter it by hand. Feed the shader an oversize plate as input and 
 simply **reduce** your **Canvas Resolution** in the settings. The shader will compute all the needed parameters
 and your output will match the distorted source.
-
-**For Flame/Smoke AE:** input size detection is broken due to a regression introduced in the AE versions, so overscan rendering will not work.
 
 ## Use in setups
 

@@ -18,9 +18,19 @@ uniform float kCoeff, kCube, uShift, vShift;
 uniform float chroma_red, chroma_green, chroma_blue;
 uniform bool apply_disto;
 
-// Uniform inputs
+// Front texture
 uniform sampler2D input1;
-uniform float adsk_input1_w, adsk_input1_h, adsk_input1_aspect, adsk_input1_frameratio;
+// Matte
+uniform sampler2D input2;
+
+
+// THESE DO NOT WORK due to a bug in AE and up, so we allow for an override
+// from the UI for these. Shame shame shame.
+// uniform float adsk_input1_w, adsk_input1_h, 
+uniform int override_w, override_h;
+
+// THESE DO WORK
+uniform float adsk_input1_aspect, adsk_input1_frameratio;
 uniform float adsk_result_w, adsk_result_h;
 
 float distortion_f(float r) {
@@ -39,7 +49,7 @@ float inverse_f(float r_distorted)
     
     // Since out LUT is shader-global check if it's been computed alrite
     // Flame has no overflow bbox so we can safely max out at the image edge, plus some cushion
-    float max_r = sqrt((adsk_input1_frameratio * adsk_input1_frameratio) + 1) + 0.1;
+    float max_r = sqrt((adsk_input1_frameratio * adsk_input1_frameratio) + 1) + 1;
     float incr = max_r / 48;
     float lut_r = 0;
     float f;
@@ -61,6 +71,8 @@ float inverse_f(float r_distorted)
             return mix(lut[i].x, lut[i+1].x, t );
         }
     }
+    // Rolled off the edge
+    return lut[47].x;
 }
 
 float aberrate(float f, float chroma)
@@ -87,13 +99,13 @@ void main(void)
    px = gl_FragCoord.xy;
    
    // Make sure we are still centered
-   px.x -= (adsk_result_w - adsk_input1_w) / 2;
-   px.y -= (adsk_result_h - adsk_input1_h) / 2;
+   // and account for overscan
+   px.x -= (adsk_result_w - override_w) / 2;
+   px.y -= (adsk_result_h - override_h) / 2;
    
    // Push the destination coordinates into the [0..1] range
-   uv.x = px.x / adsk_input1_w;
-   uv.y = px.y / adsk_input1_h;
-   
+   uv.x = px.x / override_w;
+   uv.y = px.y / override_h;
        
    // And to Syntheyes UV which are [1..-1] on both X and Y
    uv.x = (uv.x *2 ) - 1;
@@ -112,11 +124,7 @@ void main(void)
    // If we are redistorting, account for the oversize plate in the input, assume that
    // the input aspect is the same
    if(apply_disto) {
-       r = r / (float(adsk_input1_w) / float(adsk_result_w));
-   }
-   
-   // Apply or remove disto, per channel honoring chromatic aberration
-   if(apply_disto) {
+      r = r / (float(adsk_result_w) / float(override_w));
       f = inverse_f(r);
    } else {
       f = distortion_f(r);
@@ -156,6 +164,9 @@ void main(void)
    sampled.g = texture2D(input1, rgb_uvs[1]).g;
    sampled.b = texture2D(input1, rgb_uvs[2]).b;
    
+   // Alpha from the input2's R channel
+   sampled.a = texture2D(input2, rgb_uvs[0]).r;
+   
    // and assign to the output
-   gl_FragColor.rgba = vec4(sampled.rgb, 1.0 );
+   gl_FragColor.rgba = sampled;
 }
