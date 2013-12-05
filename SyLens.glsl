@@ -13,7 +13,7 @@
 
 */
 
-// Controls
+// Controls 
 uniform float kCoeff, kCube, uShift, vShift;
 uniform float chroma_red, chroma_green, chroma_blue;
 uniform bool apply_disto;
