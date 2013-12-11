@@ -1,5 +1,5 @@
 
-<ShaderNodePreset SupportsAdaptiveDegradation="0" Description="" Name="Preset Name">
+<ShaderNodePreset SupportsAdaptiveDegradation="0" Description="Straightens and distorts footage according to the Syntheyes lens distortion model. Send a mail to me@julik.nl if you have questions" Name="JT_SyLens">
 
    <Shader OutputBitDepth="Output" Index="1">
       <Uniform Index="0" NoInput="Error" Tooltip="" DisplayName="Front" Mipmaps="False" GL_TEXTURE_WRAP_T="GL_REPEAT" GL_TEXTURE_WRAP_S="GL_REPEAT" GL_TEXTURE_MAG_FILTER="GL_LINEAR" GL_TEXTURE_MIN_FILTER="GL_LINEAR" Type="sampler2D" Name="input1">
