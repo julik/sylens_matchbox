@@ -6,5 +6,5 @@ find /usr/discreet/* -maxdepth 1 -name "matchbox" | \
 while read line
 do
   echo "Copying the shaders to $line/"
-  sudo cp SyLens.glsl.p SyLens.glsl SyLens.xml $line/
+  sudo cp JT_SyLens.* $line/
 done
