@@ -24,9 +24,9 @@ uniform sampler2D input1;
 uniform sampler2D input2;
 
 
-// THESE DO NOT WORK due to a bug in AE and up, so we allow for an override
-// from the UI for these. Shame shame shame.
 // uniform float adsk_input1_w, adsk_input1_h, 
+// DO NOT WORK due to a bug in AE and up, so we allow for an override
+// from the UI for these. Shame shame shame.
 uniform int override_w, override_h;
 
 // THESE DO WORK
