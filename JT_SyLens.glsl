@@ -10,7 +10,7 @@
   f = 1 + r2*(k + kcube*sqrt(r2))
   u' = f*u
   v' = f*v
-
+ 
 */
 
 // Controls 
