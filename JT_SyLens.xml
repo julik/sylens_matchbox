@@ -1,6 +1,6 @@
 
 <ShaderNodePreset SupportsAdaptiveDegradation="0" Description="Straightens and distorts footage according to the Syntheyes lens distortion model. Send a mail to me@julik.nl if you have questions.
-  See this tutorial video made by Joel Osis
+  See this tutorial video made by Joel Osis for instructions
   https://www.youtube.com/watch?v=S_mfdIyCSWE" Name="JT_SyLens">
 
    <Shader OutputBitDepth="Output" Index="1">
