@@ -45,15 +45,14 @@
       </Uniform>
       <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="B chroma aberration multiplier" Row="2" Col="2" Page="0" DisplayName="Blue" Type="float" Name="chroma_blue">
       </Uniform>
-      
+
       <!-- Input size overrides -->
       <!-- Fourth column (3) -->
-      <Uniform ResDependent="None" Max="6000" Min="2" Default="1920" Inc="1" Tooltip="Source width" Row="0" Col="3" Page="0" DisplayName="Width" Type="int" Name="override_w">
+      <Uniform ResDependent="None" Max="6000" Min="2" Default="1920" Inc="1" Tooltip="Source width in pixels" Row="0" Col="3" Page="0" DisplayName="Width" Type="int" Name="override_w">
       </Uniform>
 
-      <Uniform ResDependent="None" Max="6000" Min="2" Default="1080" Inc="1" Tooltip="Source height" Row="1" Col="3" Page="0" DisplayName="Width" Type="int" Name="override_h">
+      <Uniform ResDependent="None" Max="6000" Min="2" Default="1080" Inc="1" Tooltip="Source height in pixels" Row="1" Col="3" Page="0" DisplayName="Height" Type="int" Name="override_h">
       </Uniform>
-      
    </Shader>
    <Page Name="SyLens" Page="0">
       <Col Name="Basics" Col="0" Page="0">
