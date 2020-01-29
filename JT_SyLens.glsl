@@ -23,14 +23,10 @@ uniform sampler2D input1;
 // Matte
 uniform sampler2D input2;
 
+// First texture pixel size and ratio
+uniform float adsk_input1_w, adsk_input1_h, adsk_input1_frameratio;
 
-// uniform float adsk_input1_w, adsk_input1_h, 
-// DO NOT WORK due to a bug in AE and up, so we allow for an override
-// from the UI for these. Shame shame shame.
-uniform int override_w, override_h;
-
-// THESE DO WORK
-uniform float adsk_input1_aspect, adsk_input1_frameratio;
+// Output pixel size and ratio
 uniform float adsk_result_w, adsk_result_h;
 
 float distortion_f(float r) {
@@ -100,22 +96,23 @@ void main(void)
    
    // Make sure we are still centered
    // and account for overscan
-   px.x -= (adsk_result_w - override_w) / 2;
-   px.y -= (adsk_result_h - override_h) / 2;
+   px.x -= (adsk_result_w - adsk_input1_w) / 2;
+   px.y -= (adsk_result_h - adsk_input1_h) / 2;
    
    // Push the destination coordinates into the [0..1] range
-   uv.x = px.x / override_w;
-   uv.y = px.y / override_h;
+   uv.x = px.x / adsk_input1_w;
+   uv.y = px.y / adsk_input1_h;
        
    // And to Syntheyes UV which are [1..-1] on both X and Y
    uv.x = (uv.x *2 ) - 1;
    uv.y = (uv.y *2 ) - 1;
-   
+
    // Add UV shifts
    uv.x += uShift;
    uv.y += vShift;
    
    // Make the X value the aspect value, so that the X coordinates go to [-aspect..aspect]
+   // _frameratio uniform _already_ accounts for non-square pixel size, which is good!
    uv.x = uv.x * adsk_input1_frameratio;
    
    // Compute the radius
@@ -124,7 +121,7 @@ void main(void)
    // If we are redistorting, account for the oversize plate in the input, assume that
    // the input aspect is the same
    if(apply_disto) {
-      r = r / (float(adsk_result_w) / float(override_w));
+      r = r / (float(adsk_result_w) / float(adsk_input1_w));
       f = inverse_f(r);
    } else {
       f = distortion_f(r);

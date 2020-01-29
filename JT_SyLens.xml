@@ -23,7 +23,8 @@
         Tooltip="Cubic distortion (Kcube). Apply this if you are dealing with mustache distortion. Normally you would leave it at 0."
         Row="1" Col="0" Page="0" DisplayName="Cubic" Type="float" Name="kCube">
       </Uniform>
-      <Uniform                                                      Default="True"          
+
+      <Uniform Default="True"          
         Tooltip="Apply distortion instead of removing it. Make sure you have enough overscan in your input!"
         Row="2" Col="0" Page="0" DisplayName="Apply Disto" Type="bool" Name="apply_disto">
       </Uniform>
@@ -46,13 +47,7 @@
       <Uniform ResDependent="None" Max="1000000.0" Min="-1000000.0" Default="0.0" Inc="0.01" Tooltip="B chroma aberration multiplier" Row="2" Col="2" Page="0" DisplayName="Blue" Type="float" Name="chroma_blue">
       </Uniform>
 
-      <!-- Input size overrides -->
       <!-- Fourth column (3) -->
-      <Uniform ResDependent="None" Max="6000" Min="2" Default="1920" Inc="1" Tooltip="Source width in pixels" Row="0" Col="3" Page="0" DisplayName="Width" Type="int" Name="override_w">
-      </Uniform>
-
-      <Uniform ResDependent="None" Max="6000" Min="2" Default="1080" Inc="1" Tooltip="Source height in pixels" Row="1" Col="3" Page="0" DisplayName="Height" Type="int" Name="override_h">
-      </Uniform>
    </Shader>
    <Page Name="SyLens" Page="0">
       <Col Name="Basics" Col="0" Page="0">
@@ -60,8 +55,6 @@
       <Col Name="Shifts" Col="1" Page="0">
       </Col>
       <Col Name="Chromatics" Col="2" Page="0">
-      </Col>
-      <Col Name="Input size" Col="3" Page="0">
       </Col>
    </Page>
 </ShaderNodePreset>
