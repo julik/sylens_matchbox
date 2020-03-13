@@ -20,10 +20,11 @@ shader icon will show up in your Matchbox shaders list.
 You will need to rerun the installer everytime you install an update for your IFFS applications (since every new install
 creates a new `matchbox` directory) 
 
-## Dealing with overscan when removing distortion
+## Dealing with non-square pixels (anamorphic footage)
 
-On the right of the matchbox UI you have the *Input size* parameters. Set them *manually* to the pixel dimensions of the plate you feed to the shader.
-It's supposed to be autodetected but due to a nasty bug in the software you have to enter it by hand. 
+SyLens deals with anamorphic plates correctly if you correctly configure the pixel aspect ratio in your node output / clip metadata.
+
+## Dealing with overscan when removing distortion
 
 When you are undistorting images it sometimes produces oversize images. By default the overflow pixels will be
 simply cropped away, however if you expand the **Canvas Resolution** of your shader, you will see that the output
@@ -34,10 +35,7 @@ Remember that the undistorted plate will always have the same aspect ratio as th
 
 ## Dealing with overscan when applying distortion
 
-On the right of the matchbox UI you have the *Input size* parameters. Set them *manually* to the pixel dimensions of the plate you feed to the shader.
-It's supposed to be autodetected but due to a nasty bug in the software you have to enter it by hand. Feed the shader an oversize plate as input and 
-simply **reduce** your **Canvas Resolution** in the settings. The shader will compute all the needed parameters
-and your output will match the distorted source.
+Same procedure as when removing distortion. Adjust your output size until you are happy with the result, or set the output to your original plate pixel dimensions.
 
 ## Use in setups
 
@@ -46,7 +44,7 @@ so there is no problem versioning it.
 
 ## License
 
-    Copyright (c) 2012 Julik Tarkhanov
+    Copyright (c) 2020 Julik Tarkhanov
     
     	Permission is hereby granted, free of charge, to any person obtaining
     	a copy of this software and associated documentation files (the
