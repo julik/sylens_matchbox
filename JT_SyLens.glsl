@@ -11,7 +11,7 @@
   u' = f*u
   v' = f*v
 
-  The rest is standard GLSL
+  The rest is standard GLSL - as it should be.
 */
 
 // Controls 
