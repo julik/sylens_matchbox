@@ -10,7 +10,8 @@
   f = 1 + r2*(k + kcube*sqrt(r2))
   u' = f*u
   v' = f*v
- 
+
+  The rest is standard GLSL
 */
 
 // Controls 
